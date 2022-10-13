@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: Eligibilty Records exprot
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/arjun
+    username: root
+    password: test
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      "[hibernate.format_sql]": true 
+    
+# End of changes    
+
