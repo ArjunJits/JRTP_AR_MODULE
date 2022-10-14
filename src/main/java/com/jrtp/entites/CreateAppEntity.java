@@ -1,12 +1,16 @@
 package com.jrtp.entites;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Data;
 
@@ -24,7 +28,12 @@ public class CreateAppEntity {
 	private String gender;
 	private LocalDate dob;
 	private Long ssn;
-	
-	
+	private String createBy;
+	@Column(name="created_date",updatable = false)
+	@CreationTimestamp
+	private LocalDate creationDate;
+	private String updatedBy;
+	@Column(name="updated_date",insertable = false)
+	private LocalDate updatedDate;
 	
 }

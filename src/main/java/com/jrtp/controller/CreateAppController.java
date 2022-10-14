@@ -18,12 +18,12 @@ public class CreateAppController {
 	
 	@PostMapping("/add")
 	public ResponseEntity<String> createAppRecord(@RequestBody CreateAppBinding cr) {
-		
+
 		String createApp = createAppService.createApp(cr);
-		if (createApp.equals("Invalid SSN"))
-		return new ResponseEntity<>(createApp, HttpStatus.CREATED);
-		else
-		return new ResponseEntity<>(createApp, HttpStatus.BAD_REQUEST);	
+		return (createApp.equals("Invalid SSN") ? 
+				  new ResponseEntity<>(createApp, HttpStatus.BAD_REQUEST)
+				: new ResponseEntity<>(createApp, HttpStatus.CREATED));
+
 	}
 	
 }

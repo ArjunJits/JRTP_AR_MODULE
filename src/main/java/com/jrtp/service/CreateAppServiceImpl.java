@@ -26,19 +26,15 @@ public class CreateAppServiceImpl implements CreateAppService {
 		ResponseEntity<String> response = rt.getForEntity(url, String.class, ssn);
 		String apimsg = response.getBody();
 
-		if ("Valid SSN".equals(apimsg)) // response.equals("Valid SSN") don't use
+		// synchronous means blocking ==> REST TEAMPLATE(Synchronous)
+		// asynchronous non blocking ==> WebClient ( Synchronous and ASynchronous)
+
+		if ("New Jersey".equals(apimsg)) // response.equals("Valid SSN") don't use
 		{
 			CreateAppEntity entity = new CreateAppEntity();
 			BeanUtils.copyProperties(cr, entity);
 			CreateAppEntity res = createAppRepo.save(entity);
-
-			if (res.getAppId() > 0) {
-				msg = "record insterd success";
-			} else {
-				msg = "record insterd failed";
-			}
-		} else {
-			msg = "Invalid SSN";
+			msg = (res.getAppId() > 0) ? "Application inserted success: " + res.getAppId() : "Invalid SSN";
 		}
 		return msg;
 	}
