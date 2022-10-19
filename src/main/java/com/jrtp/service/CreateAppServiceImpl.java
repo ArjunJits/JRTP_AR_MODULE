@@ -1,5 +1,9 @@
 package com.jrtp.service;
 
+import java.util.Optional;
+
+import javax.management.InvalidAttributeValueException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -10,6 +14,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.jrtp.bindings.CreateAppBinding;
 import com.jrtp.entites.CreateAppEntity;
+import com.jrtp.exception.InvalidSsnException;
 import com.jrtp.repo.CreateAppRepo;
 
 @Service
@@ -49,10 +54,23 @@ public class CreateAppServiceImpl implements CreateAppService {
 			msg = (res.getAppId() > 0) ? "Application inserted success: " + res.getAppId() : "Invalid SSN";
 		}else
 		{
-			msg="Invalid SSN";
+			throw new InvalidSsnException();
+			//msg="Invalid SSN";
 		}
 		
 		return msg;
+	}
+
+	@Override
+	public String getRecordbyId(Integer id) throws InvalidAttributeValueException {
+
+		Optional<CreateAppEntity> findById = createAppRepo.findById(id);
+		if (findById == null || findById.isEmpty())
+		{
+		  throw new InvalidAttributeValueException("Invalid id Arjun from ServiceImpl");
+		}else
+		
+		return "Record reterived " +findById;
 	}
 
 }
