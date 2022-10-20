@@ -29,7 +29,6 @@ public class MyControllerAdvice extends ResponseEntityExceptionHandler{
    @Override
 	protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		// TODO Auto-generated method stub
 		return new ResponseEntity<>("Method not supported",HttpStatus.METHOD_NOT_ALLOWED);
 	}
    
